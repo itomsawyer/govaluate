@@ -144,6 +144,25 @@ func TestNoParameterEvaluation(test *testing.T) {
 		},
 		EvaluationTest{
 
+			Name:     "IN non-array numeric",
+			Input:    "1 in (1)",
+			Expected: true,
+		},
+		EvaluationTest{
+
+			Name:     "IN non-array string",
+			Input:    "'foo' in ('foo')",
+			Expected: true,
+		},
+		EvaluationTest{
+
+			Name:     "IN non-array boolean",
+			Input:    "false in (true)",
+			Expected: false,
+		},
+
+		EvaluationTest{
+
 			Name:     "Logical OR operation of two clauses",
 			Input:    "(1 == 1) || (true == true)",
 			Expected: true,
@@ -501,6 +520,12 @@ func TestNoParameterEvaluation(test *testing.T) {
 		},
 		EvaluationTest{
 
+			Name:     "Array membership literals",
+			Input:    "1 in (1)",
+			Expected: true,
+		},
+		EvaluationTest{
+
 			Name:     "Array membership literal with inversion",
 			Input:    "!(1 in (1, 2, 3))",
 			Expected: false,
@@ -710,7 +735,7 @@ func TestNoParameterEvaluation(test *testing.T) {
 			Expected: true,
 		},
 		EvaluationTest{
-			
+
 			Name:  "Ternary/Java EL ambiguity",
 			Input: "false ? foo:length()",
 			Functions: map[string]ExpressionFunction{

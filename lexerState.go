@@ -362,7 +362,6 @@ func checkExpressionSyntax(tokens []ExpressionToken) error {
 func getLexerStateForToken(kind TokenKind) (lexerState, error) {
 
 	for _, possibleState := range validLexerStates {
-
 		if possibleState.kind == kind {
 			return possibleState, nil
 		}

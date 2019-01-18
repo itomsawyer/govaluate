@@ -19,6 +19,7 @@ const (
 	HANGING_ACCESSOR                = "Hanging accessor on token"
 	UNEXPORTED_ACCESSOR             = "Unable to access unexported"
 	INVALID_HEX                     = "Unable to parse hex value"
+	UNEXPECTED_CHARACTER            = "Unexpected character"
 )
 
 /*
@@ -204,6 +205,11 @@ func TestParsingFailure(test *testing.T) {
 			Name:     "Hex invalid letter",
 			Input:    "0x12g1",
 			Expected: INVALID_TOKEN_TRANSITION,
+		},
+		ParsingFailureTest{
+			Name:     "IN without clause",
+			Input:    "'foo' in 'bar'",
+			Expected: UNEXPECTED_CHARACTER,
 		},
 	}
 
