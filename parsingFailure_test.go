@@ -19,7 +19,7 @@ const (
 	HANGING_ACCESSOR                = "Hanging accessor on token"
 	UNEXPORTED_ACCESSOR             = "Unable to access unexported"
 	INVALID_HEX                     = "Unable to parse hex value"
-	UNEXPECTED_CHARACTER            = "Unexpected character"
+	UNEXPECTED_CHARACTER            = "Syntax error: COMPARATOR 'in' must followed by CLAUSE '('"
 )
 
 /*

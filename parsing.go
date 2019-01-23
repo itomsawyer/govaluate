@@ -242,7 +242,7 @@ func readToken(stream *lexerStream, state lexerState, functions map[string]Expre
 
 		// quick hack for the case where "-" can mean "prefixed negation" or "minus", which are used
 		// very differently.
-		if state.canTransitionTo(PREFIX) {
+		if state.canTransitionTo(nil, PREFIX) {
 			_, found = prefixSymbols[tokenString]
 			if found {
 

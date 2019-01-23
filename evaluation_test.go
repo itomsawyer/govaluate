@@ -151,7 +151,7 @@ func TestNoParameterEvaluation(test *testing.T) {
 		EvaluationTest{
 
 			Name:     "IN non-array string",
-			Input:    "'foo' in ('foo')",
+			Input:    "'in' in ('in')",
 			Expected: true,
 		},
 		EvaluationTest{

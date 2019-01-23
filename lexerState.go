@@ -304,10 +304,20 @@ var validLexerStates = []lexerState{
 	},
 }
 
-func (this lexerState) canTransitionTo(kind TokenKind) bool {
+func (this lexerState) canTransitionTo(lastValue interface{}, kind TokenKind) bool {
+	if this.kind == COMPARATOR {
+		if v, ok := lastValue.(string); ok {
+			if v == "in" {
+				if kind == CLAUSE {
+					return true
+				} else {
+					return false
+				}
+			}
+		}
+	}
 
 	for _, validKind := range this.validNextKinds {
-
 		if validKind == kind {
 			return true
 		}
@@ -326,8 +336,11 @@ func checkExpressionSyntax(tokens []ExpressionToken) error {
 
 	for _, token := range tokens {
 
-		if !state.canTransitionTo(token.Kind) {
+		if !state.canTransitionTo(lastToken.Value, token.Kind) {
 
+			if lastToken.Kind == COMPARATOR && lastToken.Value.(string) == "in" {
+				return errors.New("Syntax error: COMPARATOR 'in' must followed by CLAUSE '('")
+			}
 			// call out a specific error for tokens looking like they want to be functions.
 			if lastToken.Kind == VARIABLE && token.Kind == CLAUSE {
 				return errors.New("Undefined function " + lastToken.Value.(string))
