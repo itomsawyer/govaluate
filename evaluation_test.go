@@ -904,6 +904,18 @@ func TestParameterizedEvaluation(test *testing.T) {
 		EvaluationTest{
 
 			Name:  "Regex against right-hand parameter",
+			Input: "geo =~ 'CMCC$'",
+			Parameters: []EvaluationParameter{
+				EvaluationParameter{
+					Name:  "geo",
+					Value: "CN.BEIJING.CMCC",
+				},
+			},
+			Expected: true,
+		},
+		EvaluationTest{
+
+			Name:  "Regex against right-hand parameter",
 			Input: "'foobar' =~ foo",
 			Parameters: []EvaluationParameter{
 				EvaluationParameter{
